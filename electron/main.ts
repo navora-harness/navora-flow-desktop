@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron'
-import { join, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join } from 'node:path'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+/** Injected by the CJS bundle (esbuild). */
+declare const __dirname: string
 
 let mainWindow: BrowserWindow | null = null
 

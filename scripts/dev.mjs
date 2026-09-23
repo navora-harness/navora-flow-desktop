@@ -7,7 +7,7 @@ import { build as esbuild } from 'esbuild'
 import { mkdirSync } from 'node:fs'
 
 const require = createRequire(import.meta.url)
-const electronPath = require('electron') as string
+const electronPath = /** @type {string} */ (require('electron'))
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 async function buildElectron() {
@@ -38,10 +38,13 @@ const server = await createServer({
   root,
 })
 await server.listen()
-const url = server.resolvedUrls?.local[0]
+const urls = server.resolvedUrls
+const url = urls?.local?.[0] ?? urls?.network?.[0]
+console.log('[navora-flow] Vite:', url)
 if (!url) throw new Error('vite server has no local url')
 
 await buildElectron()
+console.log('[navora-flow] launching Electron…')
 
 const child = spawn(electronPath, ['.'], {
   cwd: root,
