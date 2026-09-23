@@ -8,8 +8,9 @@
 - [x] 各仓初始 README / LICENSE / 骨架 + Vitest / GitHub Actions  
 - [x] SDK：校验 / 依赖解析 / FlowRuntime + Debug 钩子  
 - [x] libraries：builtin-core + codec-core  
-- [x] desktop：Vue + Vue Flow 演示画布 + 运行回看  
-- [ ] 完整双线编辑器 / 库导入 UX / 正式断点 UI
+- [x] desktop：Vue + Vue Flow 编辑器 + 托盘 + IPC 运行时 + Navora Bridge 预留  
+- [ ] 工程打开/保存 `.nflow`、库 zip 导入、正式断点 UI  
+- [ ] Navora 侧正式消费 Bridge / 注册为 Agent 工具
 
 ## Phase 1 — MVP（可演示）
 

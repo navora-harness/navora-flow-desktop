@@ -11,6 +11,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['shared/**/*.test.ts', 'tests/**/*.test.ts'],
+    include: ['shared/**/*.test.ts', 'tests/**/*.test.ts', 'electron/**/*.test.ts'],
   },
 })

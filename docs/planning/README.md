@@ -34,6 +34,7 @@ navora-harness/
 | [07-mvp-roadmap.md](./07-mvp-roadmap.md) | MVP 与分阶段路线图 |
 | [08-open-questions.md](./08-open-questions.md) | 待决策问题清单 |
 | [09-debug.md](./09-debug.md) | 流程 Debug（断点 / 单步 / 检视） |
+| [10-navora-bridge.md](./10-navora-bridge.md) | 供 Navora 调用的本地桥接协议 |
 
 ## 一句话产品
 

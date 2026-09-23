@@ -6,10 +6,12 @@ declare module '*.vue' {
   export default component
 }
 
-interface NavoraFlowBridge {
-  version: string
+import type { NavoraFlowApi } from '../shared/ipc-types'
+
+declare global {
+  interface Window {
+    navoraFlow?: NavoraFlowApi
+  }
 }
 
-interface Window {
-  navoraFlow?: NavoraFlowBridge
-}
+export {}
