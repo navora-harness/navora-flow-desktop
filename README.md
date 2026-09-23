@@ -13,9 +13,10 @@
 ## 功能（当前）
 
 - 三栏编辑器：节点面板 / Vue Flow 画布（exec 绿线 + data 蓝口）/ 属性与 IO 检视
-- 主进程 `HostRuntime` 执行图；关闭窗口进托盘，托盘可显示/退出
-- 单实例；窗口位置记忆（`portable/window-state.json`）
-- 本机 Bridge：`portable/bridge.json` → `GET /health` · `GET /v1/catalog` · `POST /v1/run`
+- **运行环境**：`env.*` / `var.*` / `io.stdin|stdout|stderr`
+- **浏览器自动化**：Navora 对齐的 `browser.*` 节点（会话/窗口/导航/点击/输入/evaluate/截图等）；高级网络等部分仍标注 pending
+- **跑完强制清理**：`RunResult.cleanedUp`；关闭本 run 全部 Session/Window
+- 主进程 `HostRuntime`；托盘常驻；Bridge 供日后 Navora 调用
 
 ## 开发
 

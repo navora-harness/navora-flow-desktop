@@ -84,7 +84,14 @@ function registerIpc() {
 
   ipcMain.handle('nf:getCatalog', () => runtime.getCatalog())
 
-  ipcMain.handle('nf:runGraph', async (_e, graph: FlowGraph) => runtime.runGraph(graph))
+  ipcMain.handle(
+    'nf:runGraph',
+    async (
+      _e,
+      graph: FlowGraph,
+      options?: { env?: Record<string, string>; vars?: Record<string, unknown>; stdin?: unknown[] },
+    ) => runtime.runGraph(graph, options ?? {}),
+  )
 
   ipcMain.handle('nf:showMainWindow', () => {
     tray?.showMain()

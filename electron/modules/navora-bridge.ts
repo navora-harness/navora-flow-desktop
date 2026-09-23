@@ -81,12 +81,21 @@ export function startNavoraBridge(opts: {
         return
       }
       if (req.method === 'POST' && url.pathname === '/v1/run') {
-        const body = (await readJson(req)) as { graph?: FlowGraph }
+        const body = (await readJson(req)) as {
+          graph?: FlowGraph
+          env?: Record<string, string>
+          vars?: Record<string, unknown>
+          stdin?: unknown[]
+        }
         if (!body.graph) {
           send(res, 400, { ok: false, error: 'missing graph' })
           return
         }
-        const result = await opts.runtime.runGraph(body.graph)
+        const result = await opts.runtime.runGraph(body.graph, {
+          env: body.env,
+          vars: body.vars,
+          stdin: body.stdin,
+        })
         send(res, result.ok ? 200 : 422, result)
         return
       }

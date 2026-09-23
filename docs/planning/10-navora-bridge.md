@@ -23,8 +23,10 @@ Navora Flow 启动后会在本机打开 **仅监听 `127.0.0.1`** 的 HTTP 桥�
 | 方法 | 路径 | 说明 |
 |------|------|------|
 | GET | `/health` | `{ ok, service: "navora-flow" }` |
-| GET | `/v1/catalog` | 节点目录 |
-| POST | `/v1/run` | body `{ graph }` → `RunResult` |
+| GET | `/v1/catalog` | 节点目录（含 browser.*） |
+| POST | `/v1/run` | body `{ graph, env?, vars?, stdin? }` → `RunResult`（含 `streams`、`cleanedUp`） |
+
+跑完后宿主会 **关闭本 run 创建的全部浏览器 Session/Window**。
 
 ## Navora 侧后续接入建议
 

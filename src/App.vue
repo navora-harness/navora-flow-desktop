@@ -95,8 +95,11 @@ async function run() {
     snapshots.value = result.snapshots
     highlightNodeId.value = result.trace.at(-1) ?? null
     status.value = result.ok
-      ? `成功：${result.trace.join(' → ')}${result.exitOutputs ? ` → ${JSON.stringify(result.exitOutputs)}` : ''}`
-      : `失败：${result.error ?? 'unknown'}`
+      ? `成功：${result.trace.join(' → ')}${result.exitOutputs ? ` → ${JSON.stringify(result.exitOutputs)}` : ''} · cleanedUp=${result.cleanedUp}`
+      : `失败：${result.error ?? 'unknown'} · cleanedUp=${result.cleanedUp}`
+    if (result.streams?.stdout?.length) {
+      status.value += ` · stdout=${JSON.stringify(result.streams.stdout)}`
+    }
   } catch (e) {
     status.value = e instanceof Error ? e.message : String(e)
   } finally {

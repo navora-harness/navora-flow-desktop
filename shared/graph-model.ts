@@ -1,11 +1,18 @@
 import type { FlowGraph, GraphEdge, GraphNode } from 'navora-flow-library-sdk'
 import { BUILTIN_NODE_TYPES, defaultPropsFor } from './builtin-catalog'
+import { AUTOMATION_NODE_TYPES } from './automation-catalog'
 
 export type EditorNodeData = {
   type: string
   title: string
   libraryId?: string
   props: Record<string, unknown>
+}
+
+const ALL_TYPES = [...BUILTIN_NODE_TYPES, ...AUTOMATION_NODE_TYPES]
+
+export function lookupType(type: string) {
+  return ALL_TYPES.find((n) => n.type === type)
 }
 
 export function createEmptyGraph(): FlowGraph {
@@ -41,10 +48,6 @@ export function createDemoGraph(): FlowGraph {
   }
 }
 
-export function lookupType(type: string) {
-  return BUILTIN_NODE_TYPES.find((n) => n.type === type)
-}
-
 export function newNodeId(existing: string[]): string {
   let i = 1
   while (existing.includes(`n${i}`)) i += 1
@@ -59,13 +62,14 @@ export function createGraphNode(
   const decl = lookupType(type)
   if (!decl) return null
   if (type === 'flow.main' && existingIds.includes('main')) return null
+  const library = type.startsWith('browser.') ? 'browser-automation' : 'builtin-core'
   return {
     id: type === 'flow.main' ? 'main' : newNodeId(existingIds),
     type,
     x: position.x,
     y: position.y,
     props: defaultPropsFor(decl),
-    library: 'builtin-core',
+    library,
   }
 }
 
@@ -96,16 +100,17 @@ export function edgeId(): string {
 export function toVueFlowElements(graph: FlowGraph) {
   const nodes = graph.nodes.map((n) => {
     const decl = lookupType(n.type)
+    const data: EditorNodeData = {
+      type: n.type,
+      title: decl?.title ?? n.type,
+      libraryId: n.library,
+      props: n.props ?? {},
+    }
     return {
       id: n.id,
       type: 'flowNode',
       position: { x: n.x ?? 0, y: n.y ?? 0 },
-      data: {
-        type: n.type,
-        title: decl?.title ?? n.type,
-        libraryId: n.library,
-        props: n.props ?? {},
-      } satisfies EditorNodeData,
+      data,
     }
   })
 

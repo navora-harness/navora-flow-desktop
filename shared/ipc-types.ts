@@ -12,7 +12,10 @@ export type AppInfo = {
 export type NavoraFlowApi = {
   getAppInfo: () => Promise<AppInfo>
   getCatalog: () => Promise<CatalogEntry[]>
-  runGraph: (graph: FlowGraph) => Promise<RunResult>
+  runGraph: (
+    graph: FlowGraph,
+    options?: { env?: Record<string, string>; vars?: Record<string, unknown>; stdin?: unknown[] },
+  ) => Promise<RunResult>
   showMainWindow: () => Promise<void>
   hideToTray: () => Promise<void>
 }

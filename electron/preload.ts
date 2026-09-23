@@ -5,7 +5,7 @@ import type { FlowGraph } from 'navora-flow-library-sdk'
 const api: NavoraFlowApi = {
   getAppInfo: () => ipcRenderer.invoke('nf:getAppInfo'),
   getCatalog: () => ipcRenderer.invoke('nf:getCatalog'),
-  runGraph: (graph: FlowGraph) => ipcRenderer.invoke('nf:runGraph', graph),
+  runGraph: (graph, options) => ipcRenderer.invoke('nf:runGraph', graph, options),
   showMainWindow: () => ipcRenderer.invoke('nf:showMainWindow'),
   hideToTray: () => ipcRenderer.invoke('nf:hideToTray'),
 }
