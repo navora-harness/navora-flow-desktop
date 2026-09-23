@@ -1,0 +1,4 @@
+# Copy to .npmrc and adjust if you use a local Electron mirror:
+# ELECTRON download is driven by env vars (see scripts/electron-install.mjs)
+#
+# electron_mirror=http://127.0.0.1:8787/electron/
